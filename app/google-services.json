@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1053661280246",
+    "firebase_url": "https://baikapp.firebaseio.com",
+    "project_id": "baikap",
+    "storage_bucket": "baikap.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053661280246:android:e4a41f9ff379460f",
+        "android_client_info": {
+          "package_name": "org.selecciondecampeones.baikap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053661280246-b4qgj08us22elc0opf4rbicug0frtgij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVT_CI1Ffb8HGgLS8_G5HvP6NVOjZHDp4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
