@@ -1,5 +1,6 @@
 package org.selecciondecampeones.baikap;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -91,6 +92,18 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_talleres:
                 fragmentClass = TalleresFragment.class;
                 break;
+            case R.id.nav_about:
+                Intent intent_about = new Intent(this, AboutActivity.class);
+                this.startActivity(intent_about);
+                return;
+            case R.id.nav_send:
+                Intent intent_send = new Intent(this, AboutActivity.class);
+                this.startActivity(intent_send);
+                return;
+            case R.id.nav_doctor:
+                Intent intent_doctor = new Intent(this, DoctorActivity.class);
+                this.startActivity(intent_doctor);
+                return;
             default:
                 fragmentClass = EventosFragment.class;
         }
@@ -142,6 +155,15 @@ public class MainActivity extends AppCompatActivity {
             case android.R.id.home:
                 drawer.openDrawer(GravityCompat.START);
                 return true;
+
+            case R.id.nav_about:
+                Intent intent_about = new Intent(this, AboutActivity.class);
+                this.startActivity(intent_about);
+                break;
+            case R.id.nav_send:
+                Intent intent_send = new Intent(this, AboutActivity.class);
+                this.startActivity(intent_send);
+                break;
         }
 
 

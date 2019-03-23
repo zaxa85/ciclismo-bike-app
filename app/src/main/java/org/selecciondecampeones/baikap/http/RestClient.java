@@ -9,6 +9,7 @@ public class RestClient {
     public static final String BASE_URL = "http://104.131.102.15:3000";
     //public static final String BASE_URL = "http://192.168.1.132:3000";
 
+
     private static AsyncHttpClient client = new AsyncHttpClient();
 
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {

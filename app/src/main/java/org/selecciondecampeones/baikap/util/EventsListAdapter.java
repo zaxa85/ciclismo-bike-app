@@ -1,6 +1,7 @@
 package org.selecciondecampeones.baikap.util;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import org.selecciondecampeones.baikap.model.Evento;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class EventsListAdapter extends ArrayAdapter {
 
@@ -35,6 +38,8 @@ public class EventsListAdapter extends ArrayAdapter {
         String tempDateStart = viewerFormat.format(evento.getFechaInicio());
         String tempDateFinish = viewerFormat.format(evento.getFechaFin());
 
+
+
         StringBuilder row = new StringBuilder();
         row.append("Organizador: ").append(evento.getOrganizador());
 
@@ -47,7 +52,6 @@ public class EventsListAdapter extends ArrayAdapter {
                     .append(" a ").append(tempDateFinish);
         } else {
             row.append("\nFecha: ").append(tempDateStart);
-
         }
 
         // Lookup view for data population
@@ -56,6 +60,28 @@ public class EventsListAdapter extends ArrayAdapter {
         // Populate the data into the template view using the data object
         textTitle.setText(evento.getNombre());
         textBody.setText(row);
+
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+
+        System.out.println(" evento.getFechaFin() " + evento.getFechaFin() + "/ date " + date);
+        System.out.println(" evento.getFechaFin() " + tempDateStart + "/ date " + tempDateFinish);
+
+
+        System.out.println(" evento.getFechaFin().before(date) " + evento.getFechaFin().before(date));
+        System.out.println(" evento.getFechaFin().compareTo(date)" + evento.getFechaFin().compareTo(date));
+
+
+        if (evento.getFechaFin().before(date)) {
+            // textBody.setTextColor(Color.GRAY);
+            textTitle.setTextColor(Color.GRAY);
+            textBody.setTextColor(Color.GRAY);
+
+        } else {
+            textTitle.setTextColor(Color.BLACK);
+            textBody.setTextColor(Color.BLACK);
+        }
+
         // Return the completed view to render on screen
         return convertView;
     }

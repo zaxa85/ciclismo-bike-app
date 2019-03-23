@@ -31,11 +31,19 @@
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="Compatir" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="Comentarios" />
+            <item
+                android:id="@+id/nav_doctor"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Bike Doctor" />
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_menu_about"
+                android:title="About" />
         </menu>
     </item>
 

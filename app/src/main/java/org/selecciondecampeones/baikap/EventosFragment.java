@@ -114,7 +114,7 @@ public class EventosFragment extends Fragment {
                     // Attach the adapter to a ListView
                     ListView listView = (ListView) getView().findViewById(R.id.list_eventos);
                     listView.setAdapter(adapter);
-
+                    listView.setSelectionFromTop(1, 4);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

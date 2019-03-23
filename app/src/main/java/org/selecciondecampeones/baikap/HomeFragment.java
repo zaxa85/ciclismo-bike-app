@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import org.selecciondecampeones.baikap.util.DownloadImageTask;
 
@@ -24,7 +25,10 @@ public class HomeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private final String MY_URL_STRING = "http://selecciondecampeones.org/images/portfolio/full/masterA_pablo.jpg";
+    private final String MY_URL_STRING = "http://selecciondecampeones.org/images/shared/androidHome.jpg";
+    private final String MY_TITLE_STRING = "Próximo evento";
+
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -65,15 +69,17 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
         ImageView imageView = (ImageView) view.findViewById(R.id.homeImage);
+        new DownloadImageTask(imageView).execute(MY_URL_STRING);
 
-        new DownloadImageTask(imageView)
-                .execute(MY_URL_STRING);
 
+        try {
+            TextView textView = (TextView)  view.findViewById(R.id.homeText);
+            textView.setText(MY_TITLE_STRING);
+        } catch (Exception e ) {
+            e.printStackTrace();
+        }
 
         return view;
     }
