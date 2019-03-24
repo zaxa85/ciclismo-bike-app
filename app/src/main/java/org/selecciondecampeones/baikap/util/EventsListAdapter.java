@@ -64,14 +64,6 @@ public class EventsListAdapter extends ArrayAdapter {
         Calendar cal = Calendar.getInstance();
         Date date = cal.getTime();
 
-        System.out.println(" evento.getFechaFin() " + evento.getFechaFin() + "/ date " + date);
-        System.out.println(" evento.getFechaFin() " + tempDateStart + "/ date " + tempDateFinish);
-
-
-        System.out.println(" evento.getFechaFin().before(date) " + evento.getFechaFin().before(date));
-        System.out.println(" evento.getFechaFin().compareTo(date)" + evento.getFechaFin().compareTo(date));
-
-
         if (evento.getFechaFin().before(date)) {
             // textBody.setTextColor(Color.GRAY);
             textTitle.setTextColor(Color.GRAY);

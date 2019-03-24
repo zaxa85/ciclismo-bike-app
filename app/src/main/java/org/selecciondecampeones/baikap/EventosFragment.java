@@ -108,14 +108,18 @@ public class EventosFragment extends Fragment {
                         arrayOfEvents.add(tempEvento);
                     }
 
-                    // Create the adapter to convert the array to views
-                    EventsListAdapter adapter = new EventsListAdapter(getContext(), arrayOfEvents);
+                    if (getActivity()!=null) {
 
-                    // Attach the adapter to a ListView
-                    ListView listView = (ListView) getView().findViewById(R.id.list_eventos);
-                    listView.setAdapter(adapter);
-                    listView.setSelectionFromTop(1, 4);
-                } catch (JSONException e) {
+                        // Create the adapter to convert the array to views
+                        EventsListAdapter adapter = new EventsListAdapter(getContext(), arrayOfEvents);
+
+                        // Attach the adapter to a ListView
+
+                        ListView listView = (ListView) getView().findViewById(R.id.list_eventos);
+                        listView.setAdapter(adapter);
+
+                    }
+                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
