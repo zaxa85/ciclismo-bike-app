@@ -39,8 +39,18 @@ public class LugaresActivity extends FragmentActivity implements OnMapReadyCallb
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng pachacamacMexicano = new LatLng(-12.2030146, -76.8490809);
+        LatLng cieneguilla = new LatLng( -12.1185067, -76.8161714);
+        LatLng totoritas = new LatLng(-12.6787868, -76.6530128);
+        LatLng santaEulalia = new LatLng(-11.9028264, -76.6674042);
+        LatLng morroSolar = new LatLng(-12.1886629, -77.0362636);
+
+        mMap.addMarker(new MarkerOptions().position(pachacamacMexicano).title("Mexicano - Pachacamac"));
+        mMap.addMarker(new MarkerOptions().position(cieneguilla).title("Ovalo de Cieneguilla"));
+        mMap.addMarker(new MarkerOptions().position(totoritas).title("Totoritas"));
+        mMap.addMarker(new MarkerOptions().position(santaEulalia).title("Santa Eulalia"));
+        mMap.addMarker(new MarkerOptions().position(morroSolar).title("Morro Solar"));
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(morroSolar, 10.0f));
     }
 }
