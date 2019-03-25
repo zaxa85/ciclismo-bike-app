@@ -25,8 +25,11 @@ public class EventsListAdapter extends ArrayAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-
         Evento evento = (Evento) getItem(position);
+
+        // Setting current date
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
@@ -37,7 +40,6 @@ public class EventsListAdapter extends ArrayAdapter {
 
         String tempDateStart = viewerFormat.format(evento.getFechaInicio());
         String tempDateFinish = viewerFormat.format(evento.getFechaFin());
-
 
 
         StringBuilder row = new StringBuilder();
@@ -60,9 +62,6 @@ public class EventsListAdapter extends ArrayAdapter {
         // Populate the data into the template view using the data object
         textTitle.setText(evento.getNombre());
         textBody.setText(row);
-
-        Calendar cal = Calendar.getInstance();
-        Date date = cal.getTime();
 
         if (evento.getFechaFin().before(date)) {
             // textBody.setTextColor(Color.GRAY);

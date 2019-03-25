@@ -75,9 +75,9 @@ public class HomeFragment extends Fragment {
 
 
         try {
-            TextView textView = (TextView)  view.findViewById(R.id.homeText);
+            TextView textView = (TextView) view.findViewById(R.id.homeText);
             textView.setText(MY_TITLE_STRING);
-        } catch (Exception e ) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

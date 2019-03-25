@@ -6,15 +6,15 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_inicio"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_inicio"
             android:title="Inicio" />
         <item
             android:id="@+id/nav_eventos"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_menu_evento"
             android:title="Eventos" />
         <item
             android:id="@+id/nav_resultados"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_menu_resultados"
             android:title="Resultados" />
         <item
             android:id="@+id/nav_recursos"
@@ -24,22 +24,22 @@
             android:id="@+id/nav_talleres"
             android:icon="@drawable/ic_menu_manage"
             android:title="Talleres" />
+        <item
+            android:id="@+id/nav_lugares"
+            android:icon="@drawable/ic_menu_lugares"
+            android:title="Lugares" />
+        <item
+            android:id="@+id/nav_doctor"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Bike Doctor" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Social">
         <menu>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
                 android:title="Compatir" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Comentarios" />
-            <item
-                android:id="@+id/nav_doctor"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Bike Doctor" />
             <item
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_menu_about"

@@ -96,13 +96,13 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent_about = new Intent(this, AboutActivity.class);
                 this.startActivity(intent_about);
                 return;
-            case R.id.nav_send:
-                Intent intent_send = new Intent(this, AboutActivity.class);
-                this.startActivity(intent_send);
-                return;
             case R.id.nav_doctor:
                 Intent intent_doctor = new Intent(this, DoctorActivity.class);
                 this.startActivity(intent_doctor);
+                return;
+            case R.id.nav_lugares:
+                Intent intent_lugares = new Intent(this, LugaresActivity.class);
+                this.startActivity(intent_lugares);
                 return;
             default:
                 fragmentClass = EventosFragment.class;
@@ -155,14 +155,13 @@ public class MainActivity extends AppCompatActivity {
             case android.R.id.home:
                 drawer.openDrawer(GravityCompat.START);
                 return true;
-
+            case R.id.nav_lugares:
+                Intent intent_lugares = new Intent(this, LugaresActivity.class);
+                this.startActivity(intent_lugares);
+                break;
             case R.id.nav_about:
                 Intent intent_about = new Intent(this, AboutActivity.class);
                 this.startActivity(intent_about);
-                break;
-            case R.id.nav_send:
-                Intent intent_send = new Intent(this, AboutActivity.class);
-                this.startActivity(intent_send);
                 break;
         }
 

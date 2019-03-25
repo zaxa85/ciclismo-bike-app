@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.ToggleButton;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -21,6 +23,8 @@ import org.selecciondecampeones.baikap.model.Evento;
 import org.selecciondecampeones.baikap.util.EventsListAdapter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -44,8 +48,9 @@ public class EventosFragment extends Fragment {
     private String mParam2;
     private ListView listView;
     private ArrayAdapter<String> itemsAdapter;
-
     private OnFragmentInteractionListener mListener;
+    private ToggleButton toggleButton1;
+    //private boolean showOldEvents = false;
 
     public EventosFragment() {
         // Required empty public constructor
@@ -69,14 +74,7 @@ public class EventosFragment extends Fragment {
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
+    private void loadList(final boolean showOldEvents) {
 
         RequestParams rp = new RequestParams();
         //rp.add("username", "aaa"); rp.add("password", "aaa@123");
@@ -99,38 +97,81 @@ public class EventosFragment extends Fragment {
 
                 // Construct the data source
                 ArrayList<Evento> arrayOfEvents = new ArrayList<Evento>();
+                // Setting current date
+                Calendar cal = Calendar.getInstance();
+                Date date = cal.getTime();
 
                 try {
                     for (int i = 0; i < timeline.length(); i++) {
                         JSONObject event = null;
                         event = timeline.getJSONObject(i);
                         Evento tempEvento = new Evento(event);
-                        arrayOfEvents.add(tempEvento);
+
+
+                        if (tempEvento.getFechaFin().before(date) && showOldEvents == true ) {
+                            arrayOfEvents.add(tempEvento);
+
+                        } else if (tempEvento.getFechaFin().after(date) && showOldEvents == false) {
+                            arrayOfEvents.add(tempEvento);
+
+                        }
+
                     }
 
-                    if (getActivity()!=null) {
+                    if (getActivity() != null) {
 
                         // Create the adapter to convert the array to views
                         EventsListAdapter adapter = new EventsListAdapter(getContext(), arrayOfEvents);
 
                         // Attach the adapter to a ListView
-
                         ListView listView = (ListView) getView().findViewById(R.id.list_eventos);
                         listView.setAdapter(adapter);
 
                     }
-                 } catch (JSONException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         });
     }
 
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+
+        loadList(false);
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_eventos, container, false);
+        View view = inflater.inflate(R.layout.fragment_eventos, container, false);
+
+        toggleButton1 = (ToggleButton) view.findViewById(R.id.toggleButtonEvent);
+        toggleButton1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        boolean showOldEvents = false;
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+
+                if (isChecked) {
+                    showOldEvents = true;
+                } else {
+                    showOldEvents = false;
+                }
+
+                loadList(showOldEvents);
+            }
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

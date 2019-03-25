@@ -7,9 +7,11 @@
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/homeText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Próximo evento" />
+        android:text="Próximo evento"
+        android:textAlignment="center"
+        android:textSize="30sp" />
 
     <ImageView
         android:id="@+id/homeImage"
