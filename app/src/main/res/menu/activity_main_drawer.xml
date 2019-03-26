@@ -29,6 +29,10 @@
             android:icon="@drawable/ic_menu_lugares"
             android:title="Lugares" />
         <item
+            android:id="@+id/nav_interes"
+            android:icon="@drawable/ic_menu_lugares"
+            android:title="Interes" />
+        <item
             android:id="@+id/nav_doctor"
             android:icon="@drawable/ic_menu_send"
             android:title="Bike Doctor" />

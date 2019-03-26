@@ -44,12 +44,16 @@ public class LugaresActivity extends FragmentActivity implements OnMapReadyCallb
         LatLng totoritas = new LatLng(-12.6787868, -76.6530128);
         LatLng santaEulalia = new LatLng(-11.9028264, -76.6674042);
         LatLng morroSolar = new LatLng(-12.1886629, -77.0362636);
+        LatLng pentagonito = new LatLng(-12.1007894, -76.9875752);
+        LatLng ecologico = new LatLng(-12.1181388, -76.9317411);
 
         mMap.addMarker(new MarkerOptions().position(pachacamacMexicano).title("Mexicano - Pachacamac"));
         mMap.addMarker(new MarkerOptions().position(cieneguilla).title("Ovalo de Cieneguilla"));
         mMap.addMarker(new MarkerOptions().position(totoritas).title("Totoritas"));
         mMap.addMarker(new MarkerOptions().position(santaEulalia).title("Santa Eulalia"));
         mMap.addMarker(new MarkerOptions().position(morroSolar).title("Morro Solar"));
+        mMap.addMarker(new MarkerOptions().position(pentagonito).title("Pentagonito"));
+        mMap.addMarker(new MarkerOptions().position(ecologico).title("Parque Ecológico"));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(morroSolar, 10.0f));
     }

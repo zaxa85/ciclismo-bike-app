@@ -92,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_talleres:
                 fragmentClass = TalleresFragment.class;
                 break;
+            case R.id.nav_interes:
+                fragmentClass = CentroFragment.class;
+                break;
             case R.id.nav_about:
                 Intent intent_about = new Intent(this, AboutActivity.class);
                 this.startActivity(intent_about);
