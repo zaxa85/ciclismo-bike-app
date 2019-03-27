@@ -1,9 +1,13 @@
 package org.selecciondecampeones.baikap;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +30,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
  * Use the {@link CentroFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CentroFragment extends Fragment implements   OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+public class CentroFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private MapView mapView;
     private GoogleMap mMap;
@@ -129,9 +133,24 @@ public class CentroFragment extends Fragment implements   OnMapReadyCallback, Go
         void onFragmentInteraction(Uri uri);
     }
 
+    final int REQUEST_LOCATION = 0;
+
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        int REQUEST_CODE_A = 1;
+
+        if (ActivityCompat.checkSelfPermission(getContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(getContext(),
+                        android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            requestPermissions(  new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_CODE_A);
+
+
+        }
 
         // Add a marker in Sydney and move the camera
         LatLng trek = new LatLng(-12.105041, -77.0389231);
@@ -145,8 +164,8 @@ public class CentroFragment extends Fragment implements   OnMapReadyCallback, Go
         LatLng cecilVillagarcia = new LatLng( -12.0875906,-77.0520955);
         LatLng jesusnakada = new LatLng(-12.0170987,-76.8858929);
 
-        mMap.addMarker(new MarkerOptions().position(trek).title("Tienda Trek"));
-        mMap.addMarker(new MarkerOptions().position(gbbikes).title("Tienda GB Bikes"));
+        mMap.addMarker(new MarkerOptions().position(trek).title("Tienda Trek").snippet("Tienda de ciclismo especializada.\nMarcas Trek, Bontrager"));
+        mMap.addMarker(new MarkerOptions().position(gbbikes).title("Tienda GB Bikes").snippet("Tienda de ciclismo especializada.\nMarcas BMC, Colnago"));
         mMap.addMarker(new MarkerOptions().position(specialized).title("Tienda Specialized - Reducto"));
         mMap.addMarker(new MarkerOptions().position(santacruz).title("Tienda Santa Cruz"));
         mMap.addMarker(new MarkerOptions().position(bestbikes).title("Tienda Best Bikes"));
@@ -156,6 +175,23 @@ public class CentroFragment extends Fragment implements   OnMapReadyCallback, Go
         mMap.addMarker(new MarkerOptions().position(cecilVillagarcia).title("Técnico Especializado: Cecil Villagarcia"));
         mMap.addMarker(new MarkerOptions().position(jesusnakada).title("Técnico Especializado: Jesús Nakada"));
 
+
+        LatLng pachacamacMexicano = new LatLng(-12.2030146, -76.8490809);
+        LatLng cieneguilla = new LatLng( -12.1185067, -76.8161714);
+        LatLng totoritas = new LatLng(-12.6787868, -76.6530128);
+        LatLng santaEulalia = new LatLng(-11.9028264, -76.6674042);
+        LatLng morroSolar = new LatLng(-12.1886629, -77.0362636);
+        LatLng pentagonito = new LatLng(-12.1007894, -76.9875752);
+        LatLng ecologico = new LatLng(-12.1181388, -76.9317411);
+
+        mMap.addMarker(new MarkerOptions().position(pachacamacMexicano).title("Mexicano - Pachacamac"));
+        mMap.addMarker(new MarkerOptions().position(cieneguilla).title("Ovalo de Cieneguilla"));
+        mMap.addMarker(new MarkerOptions().position(totoritas).title("Totoritas"));
+        mMap.addMarker(new MarkerOptions().position(santaEulalia).title("Santa Eulalia"));
+        mMap.addMarker(new MarkerOptions().position(morroSolar).title("Morro Solar"));
+        mMap.addMarker(new MarkerOptions().position(pentagonito).title("Pentagonito"));
+        mMap.addMarker(new MarkerOptions().position(ecologico).title("Parque Ecológico"));
+
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(trek, 15.0f));
         mMap.setOnMarkerClickListener(this);
     }
@@ -163,15 +199,9 @@ public class CentroFragment extends Fragment implements   OnMapReadyCallback, Go
     /** Called when the user clicks a marker. */
     @Override
     public boolean onMarkerClick(final Marker marker) {
-
         View v = getView();
-
         TextView textView = (TextView) v.findViewById(R.id.textView7);
-        textView.setText("hice click" + marker.getId() + " = " + marker.getTitle());
-
-        // Return false to indicate that we have not consumed the event and that we wish
-        // for the default behavior to occur (which is for the camera to move such that the
-        // marker is centered and for the marker's info window to open, if it has one).
+        textView.setText(marker.getTitle() + "\n\n" + marker.getSnippet() != null ?  marker.getSnippet() : "" );
         return false;
     }
 }

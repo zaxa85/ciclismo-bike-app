@@ -83,32 +83,27 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_eventos:
                 fragmentClass = EventosFragment.class;
                 break;
-            case R.id.nav_resultados:
-                fragmentClass = ResultadosFragment.class;
-                break;
-            case R.id.nav_recursos:
-                fragmentClass = RecursosFragment.class;
-                break;
+            //case R.id.nav_resultados:
+            //    fragmentClass = ResultadosFragment.class;
+            //    break;
+            //case R.id.nav_recursos:
+            //    fragmentClass = RecursosFragment.class;
+            //    break;
             case R.id.nav_talleres:
                 fragmentClass = TalleresFragment.class;
                 break;
-            case R.id.nav_interes:
+            case R.id.nav_lugares:
                 fragmentClass = CentroFragment.class;
                 break;
             case R.id.nav_about:
-                Intent intent_about = new Intent(this, AboutActivity.class);
-                this.startActivity(intent_about);
-                return;
+                fragmentClass = AboutFragment.class;
+                break;
             case R.id.nav_doctor:
-                Intent intent_doctor = new Intent(this, DoctorActivity.class);
-                this.startActivity(intent_doctor);
-                return;
-            case R.id.nav_lugares:
-                Intent intent_lugares = new Intent(this, LugaresActivity.class);
-                this.startActivity(intent_lugares);
-                return;
+                fragmentClass = DoctorFragment.class;
+                break;
+
             default:
-                fragmentClass = EventosFragment.class;
+                fragmentClass = HomeFragment.class;
         }
 
         try {
@@ -158,17 +153,7 @@ public class MainActivity extends AppCompatActivity {
             case android.R.id.home:
                 drawer.openDrawer(GravityCompat.START);
                 return true;
-            case R.id.nav_lugares:
-                Intent intent_lugares = new Intent(this, LugaresActivity.class);
-                this.startActivity(intent_lugares);
-                break;
-            case R.id.nav_about:
-                Intent intent_about = new Intent(this, AboutActivity.class);
-                this.startActivity(intent_about);
-                break;
-        }
-
-
+         }
         return super.onOptionsItemSelected(item);
     }
 

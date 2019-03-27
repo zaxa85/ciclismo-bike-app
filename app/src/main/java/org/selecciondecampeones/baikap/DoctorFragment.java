@@ -1,43 +1,35 @@
 package org.selecciondecampeones.baikap;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import org.selecciondecampeones.baikap.util.DownloadImageTask;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link HomeFragment.OnFragmentInteractionListener} interface
+ * {@link DoctorFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link HomeFragment#newInstance} factory method to
+ * Use the {@link DoctorFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class DoctorFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private final String MY_URL_STRING = "http://selecciondecampeones.org/images/shared/androidHome.jpg";
-    private final String MY_TITLE_STRING = "Próximo evento";
-
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
     private OnFragmentInteractionListener mListener;
 
-    public HomeFragment() {
+    public DoctorFragment() {
         // Required empty public constructor
     }
 
@@ -47,11 +39,11 @@ public class HomeFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
+     * @return A new instance of fragment DoctorFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
+    public static DoctorFragment newInstance(String param1, String param2) {
+        DoctorFragment fragment = new DoctorFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -72,24 +64,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        ImageView imageView = (ImageView) view.findViewById(R.id.homeImage);
-        new DownloadImageTask(imageView).execute(MY_URL_STRING);
-
-
-        try {
-            TextView textView = (TextView) view.findViewById(R.id.homeText);
-            textView.setText(MY_TITLE_STRING);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        TextView link = (TextView) view.findViewById(R.id.hyper);
-        String linkText = "<a href='https://www.facebook.com/events/216000252660327/?event_time_id=216000282660324'>Ver más información aquí</a> .";
-        link.setText(Html.fromHtml(linkText));
-        link.setMovementMethod(LinkMovementMethod.getInstance());
-        link.setBackgroundColor(Color.RED);
-        return view;
+        return inflater.inflate(R.layout.fragment_doctor, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -104,6 +79,8 @@ public class HomeFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
+        } else {
+
         }
     }
 
