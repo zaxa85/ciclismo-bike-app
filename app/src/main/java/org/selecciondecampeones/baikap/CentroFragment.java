@@ -139,8 +139,9 @@ public class CentroFragment extends Fragment implements OnMapReadyCallback, Goog
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        int REQUEST_CODE_A = 1;
 
+        /*
+        int REQUEST_CODE_A = 1;
         if (ActivityCompat.checkSelfPermission(getContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(getContext(),
@@ -148,9 +149,8 @@ public class CentroFragment extends Fragment implements OnMapReadyCallback, Goog
 
             requestPermissions(  new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_CODE_A);
-
-
         }
+        */
 
         // Add a marker in Sydney and move the camera
         LatLng trek = new LatLng(-12.105041, -77.0389231);

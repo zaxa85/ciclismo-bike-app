@@ -6,11 +6,21 @@ android {
         applicationId "org.selecciondecampeones.baikap"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 13
+        versionCode 15
         versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
+
+    signingConfigs {
+         myConfig {
+            storeFile file("C:\\Users\\Pablo Sierralta\\bikeapp.jks")
+            storePassword "is22alvet"
+            keyAlias "key0"
+            keyPassword "is22alvet"
+        }
+    }
+
     buildTypes {
         debug {
             minifyEnabled false
@@ -18,9 +28,12 @@ android {
 
         }
         release {
+            debuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.myConfig
         }
+
     }
 }
 
