@@ -13,7 +13,7 @@ android {
     }
 
     signingConfigs {
-         myConfig {
+        myConfig {
             storeFile file("C:\\Users\\Pablo Sierralta\\bikeapp.jks")
             storePassword "is22alvet"
             keyAlias "key0"

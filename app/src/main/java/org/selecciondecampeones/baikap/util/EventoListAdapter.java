@@ -16,9 +16,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class EventsListAdapter extends ArrayAdapter {
+public class EventoListAdapter extends ArrayAdapter {
 
-    public EventsListAdapter(Context context, ArrayList<Evento> eventos) {
+    public EventoListAdapter(Context context, ArrayList<Evento> eventos) {
         super(context, 0, eventos);
     }
 
@@ -41,7 +41,6 @@ public class EventsListAdapter extends ArrayAdapter {
         String tempDateStart = viewerFormat.format(evento.getFechaInicio());
         String tempDateFinish = viewerFormat.format(evento.getFechaFin());
 
-
         StringBuilder row = new StringBuilder();
         row.append("Organizador: ").append(evento.getOrganizador());
 
@@ -57,15 +56,14 @@ public class EventsListAdapter extends ArrayAdapter {
         }
 
         // Lookup view for data population
-        TextView textBody = (TextView) convertView.findViewById(R.id.textView);
-        TextView textTitle = (TextView) convertView.findViewById(R.id.textViewTitle);
+        TextView textBody = (TextView) convertView.findViewById(R.id.eventoTextView);
+        TextView textTitle = (TextView) convertView.findViewById(R.id.eventoTextViewTitle);
         // Populate the data into the template view using the data object
         textTitle.setText(evento.getNombre());
         textBody.setText(row);
 
         if (evento.getFechaFin().before(date)) {
-            // textBody.setTextColor(Color.GRAY);
-            textTitle.setTextColor(Color.GRAY);
+             textTitle.setTextColor(Color.GRAY);
             textBody.setTextColor(Color.GRAY);
 
         } else {
