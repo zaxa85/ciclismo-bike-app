@@ -17,11 +17,12 @@
             android:id="@+id/nav_resultados"
             android:icon="@drawable/ic_menu_resultados"
             android:title="Resultados" />
-        -->
+
         <item
             android:id="@+id/nav_talleres"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Talleres Especializados" />
+            android:title="Talleres EspecializadosX\n(Por Completar)" />
+        -->
         <item
             android:id="@+id/nav_lugares"
             android:icon="@drawable/ic_menu_lugares"
@@ -29,11 +30,11 @@
         <item
             android:id="@+id/nav_entrenamiento"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Entrenamiento" />
+            android:title="Entrenamiento (Prueba)" />
         <item
             android:id="@+id/nav_doctor"
             android:icon="@drawable/ic_menu_send"
-            android:title="Bike Doctor" />
+            android:title="Bike Doctor (En construcción)" />
     </group>
 
     <item android:title="Social">
@@ -41,7 +42,7 @@
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Compatir" />
+                android:title="Compartir" />
             <item
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_menu_about"

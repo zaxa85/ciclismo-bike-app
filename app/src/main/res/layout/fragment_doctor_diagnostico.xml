@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DoctorDiagnosticoFragment">
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
+
+            <TextView
+                android:id="@+id/lblDcotorPreguntaKilometros"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginStart="5dp"
+                android:text="¿Qué Cantidad de Kilometros que recorres a la semana?"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="8dp" />
+
+            <EditText
+                android:id="@+id/txtDoctorCantidadKilometros"
+                android:layout_width="110dp"
+                android:layout_height="39dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="Km"
+                android:inputType="number"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblDcotorPreguntaKilometros" />
+
+            <TextView
+                android:id="@+id/lblDoctorExperienciaManejo"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="8dp"
+                android:text="Experiencia de manejo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chkDoctorRutaSierra" />
+
+            <CheckBox
+                android:id="@+id/chkDoctorNoCompetitivo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="No Competitivo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chkDoctorAmateur" />
+
+            <CheckBox
+                android:id="@+id/chkDoctorAmateur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Amateur"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chkDoctorPro" />
+
+            <CheckBox
+                android:id="@+id/chkDoctorPro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Pro"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblDoctorExperienciaManejo" />
+
+            <TextView
+                android:id="@+id/lblDoctorRutasTransporteEntreno"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="8dp"
+
+                android:text="Rutas de transporte o entrenamiento"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtDoctorCantidadKilometros" />
+
+            <CheckBox
+                android:id="@+id/chkDoctorCiudad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Ciudad"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblDoctorRutasTransporteEntreno" />
+
+            <CheckBox
+                android:id="@+id/chkDoctorRutaCosta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Rutas de costa (Morro Solar, Pachacamac, Mala)"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chkDoctorCiudad" />
+
+            <CheckBox
+                android:id="@+id/chkDoctorRutaSierra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Rutas de Sierra: Cieneguilla, Huarochiri, Canta"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chkDoctorRutaCosta" />
+
+
+            <TextView
+                android:id="@+id/lblDoctorUltimoMantenimiento"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="8dp"
+
+                android:text="¿Hace cuantos meses fue tu último mantenimiento?"
+                app:layout_constraintTop_toBottomOf="@+id/chkDoctorNoCompetitivo"
+                tools:layout_editor_absoluteX="5dp" />
+
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="85dp"
+                android:layout_marginStart="5dp"
+
+                app:layout_constraintTop_toBottomOf="@+id/lblDoctorUltimoMantenimiento"
+                tools:layout_editor_absoluteX="6dp">
+
+                <RadioButton
+                    android:id="@+id/rbDoctorMantenimiento1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Entre uno a dos meses" />
+
+                <RadioButton
+                    android:id="@+id/rbDoctorMantenimiento2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="De dos a seis meses" />
+
+                <RadioButton
+                    android:id="@+id/rbDoctorMantenimiento3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Hace más de seis meses" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/lblDoctorCadena"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="8dp"
+
+                android:text="¿Hace cuantos meses cambiaste de cadena?"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+                tools:layout_editor_absoluteX="6dp" />
+
+
+            <RadioGroup
+                android:id="@+id/radioGroup2"
+                android:layout_width="wrap_content"
+                android:layout_height="85dp"
+                android:layout_marginStart="5dp"
+
+                app:layout_constraintTop_toBottomOf="@+id/lblDoctorCadena"
+                tools:layout_editor_absoluteX="8dp">
+
+                <RadioButton
+                    android:id="@+id/rbDoctorCadena1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Menos un dos meses" />
+
+                <RadioButton
+                    android:id="@+id/rbDoctorCadena2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Menos de cuatro meses" />
+
+                <RadioButton
+                    android:id="@+id/rbDoctorCadena3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Hace más de cuatro meses" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/lblDoctorSuspencion"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="8dp"
+
+                android:text="¿Hace cuantos meses hiciste mantenimiento de suspencion?"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup2"
+                tools:layout_editor_absoluteX="5dp" />
+
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="85dp"
+                android:layout_marginStart="5dp"
+
+                app:layout_constraintTop_toBottomOf="@+id/lblDoctorSuspencion"
+                tools:layout_editor_absoluteX="8dp">
+
+                <RadioButton
+                    android:id="@+id/rbDoctorSuspension1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Hace menos de 3 meses" />
+
+                <RadioButton
+                    android:id="@+id/rbDoctorSuspension2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Hace 6 meses" />
+
+                <RadioButton
+                    android:id="@+id/rbDoctorSuspension3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Hace más de 6 meses" />
+
+
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/btnDoctorAnalizar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Analizar"
+                tools:layout_editor_absoluteX="145dp"
+                tools:layout_editor_absoluteY="666dp" />
+        </TableLayout>
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

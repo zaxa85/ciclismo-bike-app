@@ -24,6 +24,7 @@ import org.selecciondecampeones.baikap.util.EventoListAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
@@ -107,7 +108,7 @@ public class EventosFragment extends Fragment {
                         event = timeline.getJSONObject(i);
                         Evento tempEvento = new Evento(event);
 
-                        if (tempEvento.getFechaFin().before(date) && showOldEvents == true ) {
+                        if (tempEvento.getFechaFin().before(date) && showOldEvents == true) {
                             arrayOfEvents.add(tempEvento);
 
                         } else if (tempEvento.getFechaFin().after(date) && showOldEvents == false) {
@@ -115,6 +116,9 @@ public class EventosFragment extends Fragment {
 
                         }
                     }
+
+                    Collections.sort(arrayOfEvents);
+
 
                     if (getActivity() != null) {
 
@@ -154,10 +158,10 @@ public class EventosFragment extends Fragment {
 
         toggleButton1 = (ToggleButton) view.findViewById(R.id.toggleButtonEvent);
         toggleButton1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-        boolean showOldEvents = false;
+            boolean showOldEvents = false;
 
             @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 if (isChecked) {
                     showOldEvents = true;

@@ -34,7 +34,7 @@ public class EntrenamientoListAdapter extends ArrayAdapter {
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.entrenamientos_list_view, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_view_entrenamientos, parent, false);
         }
 
         SimpleDateFormat viewerFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -85,19 +85,25 @@ public class EntrenamientoListAdapter extends ArrayAdapter {
 
         switch (estado) {
             case "I":
-                descripcionTipo = "Intervalos"; break;
+                descripcionTipo = "Intervalos";
+                break;
             case "F":
-                descripcionTipo = "Fondo"; break;
+                descripcionTipo = "Fondo";
+                break;
             case "R":
-                descripcionTipo = "Resistencia"; break;
+                descripcionTipo = "Resistencia";
+                break;
             case "T":
-                descripcionTipo = "Técnica"; break;
+                descripcionTipo = "Técnica";
+                break;
             case "RF":
-                descripcionTipo = "Resistencia a la Fuerza"; break;
+                descripcionTipo = "Resistencia a la Fuerza";
+                break;
             case "RE":
-                descripcionTipo = "Recuperación"; break;
+                descripcionTipo = "Recuperación";
+                break;
         }
         return descripcionTipo;
-     }
+    }
 
 }

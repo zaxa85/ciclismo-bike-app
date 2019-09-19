@@ -18,7 +18,6 @@ import org.json.JSONObject;
 import org.selecciondecampeones.baikap.http.RestClient;
 import org.selecciondecampeones.baikap.model.Entrenamiento;
 import org.selecciondecampeones.baikap.util.EntrenamientoListAdapter;
-import org.selecciondecampeones.baikap.util.EventoListAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -204,6 +203,16 @@ public class EntrenamientoFragment extends Fragment {
                     arrayOfEntrenamientos.add(en5);
                     arrayOfEntrenamientos.add(en6);
                     arrayOfEntrenamientos.add(en7);
+
+                    arrayOfEntrenamientos.add(en4);
+                    arrayOfEntrenamientos.add(en5);
+                    arrayOfEntrenamientos.add(en6);
+                    arrayOfEntrenamientos.add(en7);
+                    arrayOfEntrenamientos.add(en4);
+                    arrayOfEntrenamientos.add(en5);
+                    arrayOfEntrenamientos.add(en6);
+                    arrayOfEntrenamientos.add(en7);
+
  /*
                     arrayOfEntrenamientos.add(en7);
                     arrayOfEntrenamientos.add(en7);
@@ -225,8 +234,8 @@ public class EntrenamientoFragment extends Fragment {
                         listView.setAdapter(adapter);
                         listView.setVerticalScrollBarEnabled(true);
                     }
-              //  } catch (JSONException e) {
-               //   e.printStackTrace();
+                    //  } catch (JSONException e) {
+                    //   e.printStackTrace();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -255,6 +264,7 @@ public class EntrenamientoFragment extends Fragment {
 
         return view;
     }
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

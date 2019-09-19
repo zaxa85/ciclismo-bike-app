@@ -1,6 +1,5 @@
 package org.selecciondecampeones.baikap;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -89,9 +88,9 @@ public class MainActivity extends AppCompatActivity {
             //case R.id.nav_recursos:
             //    fragmentClass = RecursosFragment.class;
             //    break;
-            case R.id.nav_talleres:
-                fragmentClass = TalleresFragment.class;
-                break;
+            //case R.id.nav_talleres:
+            //    fragmentClass = TalleresFragment.class;
+             //   break;
             case R.id.nav_lugares:
                 fragmentClass = CentroFragment.class;
                 break;
@@ -102,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = AboutFragment.class;
                 break;
             case R.id.nav_doctor:
-                fragmentClass = DoctorFragment.class;
+                fragmentClass = DoctorDiagnosticoFragment.class;
                 break;
 
             default:
@@ -156,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
             case android.R.id.home:
                 drawer.openDrawer(GravityCompat.START);
                 return true;
-         }
+        }
         return super.onOptionsItemSelected(item);
     }
 

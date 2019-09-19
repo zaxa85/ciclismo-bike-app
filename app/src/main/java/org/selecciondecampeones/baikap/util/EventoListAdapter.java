@@ -33,7 +33,7 @@ public class EventoListAdapter extends ArrayAdapter {
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.eventos_list_view, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_view_eventos, parent, false);
         }
 
         SimpleDateFormat viewerFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -63,7 +63,7 @@ public class EventoListAdapter extends ArrayAdapter {
         textBody.setText(row);
 
         if (evento.getFechaFin().before(date)) {
-             textTitle.setTextColor(Color.GRAY);
+            textTitle.setTextColor(Color.GRAY);
             textBody.setTextColor(Color.GRAY);
 
         } else {

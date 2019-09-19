@@ -3,6 +3,9 @@ package org.selecciondecampeones.baikap;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -12,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -21,6 +23,16 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.selecciondecampeones.baikap.http.RestClient;
+import org.selecciondecampeones.baikap.model.Lugar;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,9 +44,15 @@ import com.google.android.gms.maps.model.MarkerOptions;
  */
 public class CentroFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
+    // The minimum distance to change Updates in meters
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 1; // 10 meters
+    // The minimum time between updates in milliseconds
+    private static final long MIN_TIME_BW_UPDATES = 1; // 1 minute
+    final int REQUEST_LOCATION = 0;
     private MapView mapView;
     private GoogleMap mMap;
-
+    private LocationManager locationManager;
+    private LocationListener locationListener;
     private OnFragmentInteractionListener mListener;
 
     public CentroFragment() {
@@ -56,15 +74,16 @@ public class CentroFragment extends Fragment implements OnMapReadyCallback, Goog
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_centro, container, false);
+        View currentView = inflater.inflate(R.layout.fragment_centro, container, false);
 
         // Gets the MapView from the XML layout and creates it
-        mapView = (MapView) v.findViewById(R.id.mapView2);
+        mapView = (MapView) currentView.findViewById(R.id.txtCentroMapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this); //this is important
 
-        return v;
+        return currentView;
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -118,29 +137,11 @@ public class CentroFragment extends Fragment implements OnMapReadyCallback, Goog
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
-
-    final int REQUEST_LOCATION = 0;
-
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        /*
+/*
         int REQUEST_CODE_A = 1;
         if (ActivityCompat.checkSelfPermission(getContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -150,9 +151,11 @@ public class CentroFragment extends Fragment implements OnMapReadyCallback, Goog
             requestPermissions(  new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_CODE_A);
         }
-        */
+*/
 
         // Add a marker in Sydney and move the camera
+
+        /*
         LatLng trek = new LatLng(-12.105041, -77.0389231);
         LatLng gbbikes = new LatLng( -12.1229818,-77.0259343);
         LatLng specialized = new LatLng(-12.1287301,-77.0238403);
@@ -192,16 +195,137 @@ public class CentroFragment extends Fragment implements OnMapReadyCallback, Goog
         mMap.addMarker(new MarkerOptions().position(pentagonito).title("Pentagonito"));
         mMap.addMarker(new MarkerOptions().position(ecologico).title("Parque Ecológico"));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(trek, 15.0f));
         mMap.setOnMarkerClickListener(this);
+/*/
+
+        RequestParams rp = new RequestParams();
+        //rp.add("username", "aaa"); rp.add("password", "aaa@123");
+
+        RestClient.get("/api/location", rp, new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray timeline) {
+
+                try {
+                    for (int i = 0; i < timeline.length(); i++) {
+                        JSONObject event = null;
+                        event = timeline.getJSONObject(i);
+                        Lugar tempLugar = new Lugar(event);
+
+                        LatLng makerLocation = new LatLng(tempLugar.getLongitud(), tempLugar.getLatitud());
+
+                        MarkerOptions makerOpt = new MarkerOptions();
+                        makerOpt.position(makerLocation);
+                        makerOpt.title(tempLugar.getTitulo());
+                        makerOpt.snippet(tempLugar.getDescripción());
+
+                        mMap.addMarker(makerOpt);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+        // Zoom into users location
+        locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+        locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                centreMapOnLocation(location, "Your Location");
+            }
+
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+
+            }
+        };
+
+
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, locationListener);
+            Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            centreMapOnLocation(lastKnownLocation, "Mi ubicación");
+
+
+
+        } else {
+
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+
     }
 
-    /** Called when the user clicks a marker. */
+    /**
+     * Called when the user clicks a marker.
+     */
     @Override
     public boolean onMarkerClick(final Marker marker) {
-        View v = getView();
-        TextView textView = (TextView) v.findViewById(R.id.textView7);
-        textView.setText(marker.getTitle() + "\n\n" + marker.getSnippet() != null ?  marker.getSnippet() : "" );
-        return false;
+        View currentView = getView();
+        TextView textView = (TextView) currentView.findViewById(R.id.txtCentroDetalle);
+        textView.setText(marker.getTitle() + "\n\n" + marker.getSnippet() != null ? marker.getSnippet() : "");
+        return true;
     }
+
+    public void centreMapOnLocation(Location location, String title) {
+
+        if (location != null ) {
+            LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
+            mMap.clear();
+            mMap.addMarker(new MarkerOptions().position(userLocation).title(title));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 12));
+
+        }
+/*
+        LatLng trek = new LatLng(-12.105041, -77.0389231);
+        mMap.addMarker(new MarkerOptions().position(trek).title("Your Location"));
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(trek, 15.0f));
+        */
+
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
+
+    /*
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull  String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+
+            if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,locationListener);
+
+                Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                centreMapOnLocation(lastKnownLocation,"Your Location");
+            }
+        }
+    }
+    */
 }

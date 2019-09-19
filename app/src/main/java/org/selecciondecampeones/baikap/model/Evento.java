@@ -1,5 +1,7 @@
 package org.selecciondecampeones.baikap.model;
 
+import android.support.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -7,7 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Evento {
+public class Evento implements Comparable<Evento>  {
 
     private String id;
     private String nombre;
@@ -99,4 +101,17 @@ public class Evento {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+
+    @Override
+    public String toString() {
+        return "[ id=" + id + ", nombre=" + nombre + ", fechaInicio=" + fechaInicio + "]";
+    }
+
+    @Override
+    public int compareTo(Evento o) {
+        return this.fechaInicio.compareTo(o.fechaInicio);
+    }
+
+
 }

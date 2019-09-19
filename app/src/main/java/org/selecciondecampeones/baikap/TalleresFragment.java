@@ -138,7 +138,7 @@ public class TalleresFragment extends Fragment {
                         allNames.add(row.toString());
                     }
 
-                    itemsAdapter = new ArrayAdapter<String>(getContext(), R.layout.eventos_list_view, R.id.eventoTextView, allNames);
+                    itemsAdapter = new ArrayAdapter<String>(getContext(), R.layout.list_view_eventos, R.id.eventoTextView, allNames);
                     ListView listView = (ListView) getView().findViewById(R.id.list_talleres);
                     listView.setAdapter(itemsAdapter);
 

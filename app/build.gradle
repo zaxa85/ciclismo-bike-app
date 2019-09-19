@@ -6,7 +6,7 @@ android {
         applicationId "org.selecciondecampeones.baikap"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 15
+        versionCode 16
         versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
