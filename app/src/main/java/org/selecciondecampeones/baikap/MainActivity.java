@@ -88,9 +88,9 @@ public class MainActivity extends AppCompatActivity {
             //case R.id.nav_recursos:
             //    fragmentClass = RecursosFragment.class;
             //    break;
-            //case R.id.nav_talleres:
-            //    fragmentClass = TalleresFragment.class;
-             //   break;
+             case R.id.nav_talleres:
+                fragmentClass = LugaresFragment.class;
+                break;
             case R.id.nav_lugares:
                 fragmentClass = CentroFragment.class;
                 break;

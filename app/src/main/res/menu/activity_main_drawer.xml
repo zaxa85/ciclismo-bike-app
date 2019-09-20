@@ -17,12 +17,12 @@
             android:id="@+id/nav_resultados"
             android:icon="@drawable/ic_menu_resultados"
             android:title="Resultados" />
-
+  -->
         <item
             android:id="@+id/nav_talleres"
             android:icon="@drawable/ic_menu_manage"
             android:title="Talleres EspecializadosX\n(Por Completar)" />
-        -->
+
         <item
             android:id="@+id/nav_lugares"
             android:icon="@drawable/ic_menu_lugares"
