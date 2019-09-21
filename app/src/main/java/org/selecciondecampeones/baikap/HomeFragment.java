@@ -1,13 +1,17 @@
 package org.selecciondecampeones.baikap;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import org.selecciondecampeones.baikap.util.DownloadImageTask;
 
@@ -24,7 +28,10 @@ public class HomeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private final String MY_URL_STRING = "http://selecciondecampeones.org/images/portfolio/full/masterA_pablo.jpg";
+    private final String MY_URL_STRING = "http://selecciondecampeones.org/images/shared/androidHome.jpg";
+    private final String MY_TITLE_STRING = "Próximo evento";
+
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -65,16 +72,23 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
         ImageView imageView = (ImageView) view.findViewById(R.id.homeImage);
-
-        new DownloadImageTask(imageView)
-                .execute(MY_URL_STRING);
+        new DownloadImageTask(imageView).execute(MY_URL_STRING);
 
 
+        try {
+            TextView textView = (TextView) view.findViewById(R.id.homeText);
+            textView.setText(MY_TITLE_STRING);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        TextView link = (TextView) view.findViewById(R.id.hyper);
+        String linkText = "<a href='https://www.facebook.com/events/216000252660327/?event_time_id=216000282660324'>Ver más información aquí</a> .";
+        link.setText(Html.fromHtml(linkText));
+        link.setMovementMethod(LinkMovementMethod.getInstance());
+        link.setBackgroundColor(Color.RED);
         return view;
     }
 

@@ -1,5 +1,7 @@
 package org.selecciondecampeones.baikap.model;
 
+import android.support.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -7,7 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Evento {
+public class Evento implements Comparable<Evento>  {
 
     private String id;
     private String nombre;
@@ -18,7 +20,6 @@ public class Evento {
     private int estado;
     private String tipo;
 
-
     public Evento(JSONObject event) throws JSONException {
         this.nombre = event.getString("name");
         this.organizador = event.getString("organizer");
@@ -26,18 +27,16 @@ public class Evento {
         String dateStart = event.getString("datestart");
         String dateFinish = event.getString("datefinish");
 
-        SimpleDateFormat viewerFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat databaseFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
-            this.fechaInicio = viewerFormat.parse(dateStart);
-            this.fechaFin = viewerFormat.parse(dateFinish);
+            this.fechaInicio = databaseFormat.parse(dateStart);
+            this.fechaFin = databaseFormat.parse(dateFinish);
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
     }
-
 
     public String getId() {
         return id;
@@ -102,4 +101,17 @@ public class Evento {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+
+    @Override
+    public String toString() {
+        return "[ id=" + id + ", nombre=" + nombre + ", fechaInicio=" + fechaInicio + "]";
+    }
+
+    @Override
+    public int compareTo(Evento o) {
+        return this.fechaInicio.compareTo(o.fechaInicio);
+    }
+
+
 }

@@ -1,14 +1,19 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+
     tools:context="org.selecciondecampeones.baikap.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/homeText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Se viene el evento recontra JIJUNA" />
+        android:text="Próximo evento"
+        android:textAlignment="viewStart"
+        android:textSize="30sp" />
 
     <ImageView
         android:id="@+id/homeImage"
@@ -16,4 +21,13 @@
         android:layout_height="wrap_content"
         android:src="@drawable/side_nav_bar" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/hyper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textAlignment="viewStart"
+        android:textSize="30sp" />
+
+
+</LinearLayout>

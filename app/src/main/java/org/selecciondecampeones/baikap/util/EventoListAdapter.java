@@ -1,6 +1,7 @@
 package org.selecciondecampeones.baikap.util;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,22 +13,28 @@ import org.selecciondecampeones.baikap.model.Evento;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
-public class EventsListAdapter extends ArrayAdapter {
+public class EventoListAdapter extends ArrayAdapter {
 
-    public EventsListAdapter(Context context, ArrayList<Evento> eventos) {
+    public EventoListAdapter(Context context, List<Evento> eventos) {
         super(context, 0, eventos);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-
         Evento evento = (Evento) getItem(position);
+
+        // Setting current date
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.eventos_list_view, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_view_eventos, parent, false);
         }
 
         SimpleDateFormat viewerFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -47,15 +54,30 @@ public class EventsListAdapter extends ArrayAdapter {
                     .append(" a ").append(tempDateFinish);
         } else {
             row.append("\nFecha: ").append(tempDateStart);
-
         }
 
         // Lookup view for data population
-        TextView textBody = (TextView) convertView.findViewById(R.id.textView);
-        TextView textTitle = (TextView) convertView.findViewById(R.id.textViewTitle);
+        TextView textBody = (TextView) convertView.findViewById(R.id.eventoTextView);
+        TextView textTitle = (TextView) convertView.findViewById(R.id.eventoTextViewTitle);
         // Populate the data into the template view using the data object
         textTitle.setText(evento.getNombre());
         textBody.setText(row);
+
+
+        if (evento.getFechaInicio().equals(date)) {
+            textTitle.setTextColor(Color.RED);
+            textBody.setTextColor(Color.RED);
+            textTitle.setText(textTitle.getText() + "\t" + "¡En curso!");
+        }
+            else if (evento.getFechaFin().before(date)) {
+            textTitle.setTextColor(Color.GRAY);
+            textBody.setTextColor(Color.GRAY);
+
+        } else {
+            textTitle.setTextColor(Color.BLACK);
+            textBody.setTextColor(Color.BLACK);
+        }
+
         // Return the completed view to render on screen
         return convertView;
     }

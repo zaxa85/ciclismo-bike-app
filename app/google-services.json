@@ -1,7 +1,7 @@
 {
   "project_info": {
     "project_number": "1053661280246",
-    "firebase_url": "https://baikapp.firebaseio.com",
+    "firebase_url": "https://baikap.firebaseio.com",
     "project_id": "baikap",
     "storage_bucket": "baikap.appspot.com"
   },
@@ -21,7 +21,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAVT_CI1Ffb8HGgLS8_G5HvP6NVOjZHDp4"
+          "current_key": "AIzaSyAtBUJhXkR885etG4RHlBFumT95MWyIAEo"
         }
       ],
       "services": {

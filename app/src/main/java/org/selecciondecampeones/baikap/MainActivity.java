@@ -1,5 +1,6 @@
 package org.selecciondecampeones.baikap;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -82,17 +83,43 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_eventos:
                 fragmentClass = EventosFragment.class;
                 break;
-            case R.id.nav_resultados:
-                fragmentClass = ResultadosFragment.class;
+            //case R.id.nav_resultados:
+            //    fragmentClass = ResultadosFragment.class;
+            //    break;
+            //case R.id.nav_recursos:
+            //    fragmentClass = RecursosFragment.class;
+            //    break;
+            // case R.id.nav_talleres:
+            //     fragmentClass = LugaresFragment.class;
+            //    break;
+            case R.id.nav_lugares:
+                fragmentClass = LugaresFragment.class;
                 break;
-            case R.id.nav_recursos:
-                fragmentClass = RecursosFragment.class;
+            //    case R.id.nav_entrenamiento:
+            //    fragmentClass = EntrenamientoFragment.class;
+            //     break;
+            case R.id.nav_about:
+                fragmentClass = AboutFragment.class;
                 break;
-            case R.id.nav_talleres:
-                fragmentClass = TalleresFragment.class;
+            case R.id.nav_doctor:
+                fragmentClass = DoctorDiagnosticoFragment.class;
                 break;
+
+            case R.id.nav_share:
+                try {
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Baikap");
+                    String shareMessage= "\nTe recomiendo esta aplicación de ciclismo\n\n";
+                    shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                    startActivity(Intent.createChooser(shareIntent, "Elige una opción:"));
+                } catch(Exception e) {
+                    //e.toString();
+                }
+
             default:
-                fragmentClass = EventosFragment.class;
+                fragmentClass = HomeFragment.class;
         }
 
         try {
@@ -143,8 +170,6 @@ public class MainActivity extends AppCompatActivity {
                 drawer.openDrawer(GravityCompat.START);
                 return true;
         }
-
-
         return super.onOptionsItemSelected(item);
     }
 
