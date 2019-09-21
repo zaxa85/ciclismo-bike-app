@@ -14,6 +14,16 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="14dp"
         android:layout_marginBottom="32dp"
-        android:text="Baikap\n\nEs una aplicación para ciclistas hecha por ciclistas.\n\nEn Baikap encontrarás herramientas desde un calendario de eventos, ubicación de talleres, lugares de intererés y hasta un BikeMonitor para evaluar el uso de tus componentes.\n\nAlgunas funcionalidades se irán desarrollando poco a poco ya dependiendo de la disponibilidad del autor.\n\nAutor\nPablo Sierralta zaxa85@gmail.com\nLicencia La distriución de este software es libre pero no la alteración de su código o componentes\n\nCréditos\n-Jesús Nakada - Por ayudarme a probar esta aplicación\n-Cecil Villagarcia - Por sus ideas y apoyo en números\n-Raphael Guevara - Por apoyarme en el diseño y logo\n-Al Club Selección de Campeones\n" />
+        android:text="Baikap\n\nEs una aplicación para ciclistas hecha por ciclistas.
+        \n\nEn Baikap encontrarás herramientas desde un calendario de eventos, ubicación de talleres, lugares de intererés y hasta un BikeDoctor para evaluar el uso de tus componentes.
+        \n\nAlgunas funcionalidades se irán desarrollando poco a poco ya dependiendo de la disponibilidad del autor.
+        \n\nAutor\nPablo Sierralta zaxa85@gmail.com
+        \n\nLicencia
+        \nLa distribución de este software es libre pero no la alteración de su código o componentes
+        \n\nCréditos
+        \n-Jesús Nakada - Por ayudarme a probar esta aplicación
+        \n-Cecil Villagarcia - Por sus ideas y apoyo en números
+        \n-Raphael Guevara - Por apoyarme en el diseño y logo
+        \n-Al Club Selección de Campeones\n" />
 
 </FrameLayout>

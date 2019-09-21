@@ -17,28 +17,33 @@
             android:id="@+id/nav_resultados"
             android:icon="@drawable/ic_menu_resultados"
             android:title="Resultados" />
-  -->
+
         <item
             android:id="@+id/nav_talleres"
             android:icon="@drawable/ic_menu_manage"
             android:title="Talleres EspecializadosX\n(Por Completar)" />
-
+  -->
         <item
             android:id="@+id/nav_lugares"
             android:icon="@drawable/ic_menu_lugares"
             android:title="Lugares de interés" />
-        <item
-            android:id="@+id/nav_entrenamiento"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Entrenamiento (Prueba)" />
+        <!--
+      <item
+          android:id="@+id/nav_entrenamiento"
+          android:icon="@drawable/ic_menu_slideshow"
+          android:title="Entrenamiento (Prueba)" />
+      -->
         <item
             android:id="@+id/nav_doctor"
             android:icon="@drawable/ic_menu_send"
             android:title="Bike Doctor (En construcción)" />
+
     </group>
 
     <item android:title="Social">
         <menu>
+            <group android:checkableBehavior="single">
+
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
@@ -47,7 +52,9 @@
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_menu_about"
                 android:title="About" />
-        </menu>
-    </item>
+            </group>
 
+        </menu>
+
+    </item>
 </menu>

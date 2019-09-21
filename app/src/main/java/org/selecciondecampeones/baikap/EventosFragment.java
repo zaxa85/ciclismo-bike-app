@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -39,115 +40,27 @@ import cz.msebera.android.httpclient.Header;
  * create an instance of this fragment.
  */
 public class EventosFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     private ListView listView;
     private ArrayAdapter<String> itemsAdapter;
     private OnFragmentInteractionListener mListener;
     private ToggleButton toggleButton1;
-    //private boolean showOldEvents = false;
+    private List<Evento> listaEventos = null;
 
     public EventosFragment() {
-        // Required empty public constructor
+        listaEventos = new ArrayList<Evento>();
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EventosFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static EventosFragment newInstance(String param1, String param2) {
         EventosFragment fragment = new EventosFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
 
-    private void loadList(final boolean showOldEvents) {
-
-        RequestParams rp = new RequestParams();
-        //rp.add("username", "aaa"); rp.add("password", "aaa@123");
-
-        RestClient.get("/api/sportevent", rp, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                // If the response is JSONObject instead of expected JSONArray
-                //Log.d("asd", "---------------- this is response : " + response);
-                try {
-                    JSONObject serverResp = new JSONObject(response.toString());
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray timeline) {
-
-                // Construct the data source
-                ArrayList<Evento> arrayOfEvents = new ArrayList<Evento>();
-                // Setting current date
-                Calendar cal = Calendar.getInstance();
-                Date date = cal.getTime();
-
-                try {
-                    for (int i = 0; i < timeline.length(); i++) {
-                        JSONObject event = null;
-                        event = timeline.getJSONObject(i);
-                        Evento tempEvento = new Evento(event);
-
-                        if (tempEvento.getFechaFin().before(date) && showOldEvents == true) {
-                            arrayOfEvents.add(tempEvento);
-
-                        } else if (tempEvento.getFechaFin().after(date) && showOldEvents == false) {
-                            arrayOfEvents.add(tempEvento);
-
-                        }
-                    }
-
-                    Collections.sort(arrayOfEvents);
-
-
-                    if (getActivity() != null) {
-
-                        // Create the adapter to convert the array to views
-                        EventoListAdapter adapter = new EventoListAdapter(getContext(), arrayOfEvents);
-
-                        // Attach the adapter to a ListView
-                        ListView listView = (ListView) getView().findViewById(R.id.list_eventos);
-                        listView.setAdapter(adapter);
-
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-        loadList(false);
-
+         loadListData(false);
     }
 
     @Override
@@ -169,7 +82,7 @@ public class EventosFragment extends Fragment {
                     showOldEvents = false;
                 }
 
-                loadList(showOldEvents);
+                loadListValues(showOldEvents);
             }
         });
 
@@ -213,5 +126,102 @@ public class EventosFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+
+    private void loadListData(final boolean showOldEvents) {
+
+        RequestParams rp = new RequestParams();
+        //rp.add("username", "aaa"); rp.add("password", "aaa@123");
+
+        RestClient.get("/api/sportevent", rp, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                // If the response is JSONObject instead of expected JSONArray
+                //Log.d("asd", "---------------- this is response : " + response);
+                try {
+                    JSONObject serverResp = new JSONObject(response.toString());
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray timeline) {
+                // Construct the data source
+                List<Evento> arrayOfEvents = new ArrayList<Evento>();
+                // Setting current date
+                Calendar cal = Calendar.getInstance();
+                Date date = cal.getTime();
+
+                try {
+                    for (int i = 0; i < timeline.length(); i++) {
+                        JSONObject event = timeline.getJSONObject(i);
+                        Evento tempEvento = new Evento(event);
+                        listaEventos.add(tempEvento);
+
+                        if (tempEvento.getFechaFin().before(date) && showOldEvents == true) {
+                            arrayOfEvents.add(tempEvento);
+
+                        } else if (tempEvento.getFechaFin().after(date) && showOldEvents == false) {
+                            arrayOfEvents.add(tempEvento);
+                        }
+                    }
+
+                    Collections.sort(arrayOfEvents);
+
+                    if (getActivity() != null) {
+                        // Create the adapter to convert the array to views
+                        EventoListAdapter adapter = new EventoListAdapter(getContext(), arrayOfEvents);
+
+                        // Attach the adapter to a ListView
+                        ListView listView = (ListView) getView().findViewById(R.id.list_eventos);
+                        listView.setAdapter(adapter);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+
+    private void loadListValues(final boolean showOldEvents) {
+
+        if (toggleButton1 != null) {
+            toggleButton1.setEnabled(false);
+        }
+        // Construct the data source
+        List<Evento> arrayOfEvents = new ArrayList<Evento>();
+        // Setting current date
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+
+        for (int i = 0; i < listaEventos.size(); i++) {
+            Evento tempEvento = listaEventos.get(i);
+
+            if (tempEvento.getFechaFin().before(date) && showOldEvents == true) {
+                arrayOfEvents.add(tempEvento);
+
+            } else if (tempEvento.getFechaFin().after(date) && showOldEvents == false) {
+                arrayOfEvents.add(tempEvento);
+            }
+        }
+
+        Collections.sort(arrayOfEvents);
+
+        if (getActivity() != null) {
+            // Create the adapter to convert the array to views
+            EventoListAdapter adapter = new EventoListAdapter(getContext(), arrayOfEvents);
+
+            // Attach the adapter to a ListView
+            ListView listView = (ListView) getView().findViewById(R.id.list_eventos);
+            listView.setAdapter(adapter);
+
+        }
+        if (toggleButton1 != null) {
+            toggleButton1.setEnabled(true);
+        }
     }
 }

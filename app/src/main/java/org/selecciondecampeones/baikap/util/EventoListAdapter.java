@@ -15,10 +15,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class EventoListAdapter extends ArrayAdapter {
 
-    public EventoListAdapter(Context context, ArrayList<Evento> eventos) {
+    public EventoListAdapter(Context context, List<Evento> eventos) {
         super(context, 0, eventos);
     }
 
@@ -62,7 +63,13 @@ public class EventoListAdapter extends ArrayAdapter {
         textTitle.setText(evento.getNombre());
         textBody.setText(row);
 
-        if (evento.getFechaFin().before(date)) {
+
+        if (evento.getFechaInicio().equals(date)) {
+            textTitle.setTextColor(Color.RED);
+            textBody.setTextColor(Color.RED);
+            textTitle.setText(textTitle.getText() + "\t" + "¡En curso!");
+        }
+            else if (evento.getFechaFin().before(date)) {
             textTitle.setTextColor(Color.GRAY);
             textBody.setTextColor(Color.GRAY);
 
